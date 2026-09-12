@@ -1,0 +1,16 @@
+from typing import Protocol
+
+from app.products.model import Product
+from app.products.schemas import ProductCreate, ProductUpdate
+
+
+class ProductRepositoryPort(Protocol):
+    def create(self, data: ProductCreate) -> Product: ...
+
+    def get_by_id(self, product_id: int) -> Product | None: ...
+
+    def list(self, *, limit: int, offset: int) -> tuple[list[Product], int]: ...
+
+    def update(self, product: Product, data: ProductUpdate) -> Product: ...
+
+    def delete(self, product: Product) -> None: ...
